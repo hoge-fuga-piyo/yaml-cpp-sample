@@ -22,9 +22,9 @@ void mapSample() {
 
 	// 読み込みサンプル
 	{
-		YAML::Node param = YAML::LoadFile("param1.yaml");
-		std::cout << "param1: " << param["param1"] << std::endl;
-		std::cout << "param2: " << param["param2"] << std::endl;
+		YAML::Node load_file = YAML::LoadFile("param1.yaml");
+		std::cout << "param1: " << load_file["param1"] << std::endl;
+		std::cout << "param2: " << load_file["param2"] << std::endl;
 	}
 }
 
@@ -48,6 +48,18 @@ void arraySample() {
 		std::ofstream ofs("param2.yaml");
 		ofs << out.c_str();
 		ofs.close();
+	}
+
+	// 読み込みサンプル
+	{
+		YAML::Node load_file = YAML::LoadFile("param2.yaml");
+		for (size_t i = 0; i < load_file["key"].size(); i++) {
+			std::vector<std::string> vec = load_file["key"][i].as<std::vector<std::string>>();
+			for (const auto element : vec) {
+				std::cout << element << ", ";
+			}
+			std::cout << "\n";
+		}
 	}
 }
 
